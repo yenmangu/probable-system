@@ -1,0 +1,37 @@
+<div class="main-container">
+	<div class="search-bar-container">
+		<div class="field">
+			<p class="control has-icons-left">
+				<input
+					class="input"
+					type="text"
+					placeholder="filter" />
+				<span class="icon is-small is-left"><i class="fas fa-search"></i></span>
+			</p>
+		</div>
+	</div>
+
+	<div
+		class="notes-list"
+		[@listAnimation]>
+		<app-note-card
+			*ngFor="let note of notes; index as i"
+			[link]="'edit/' + note.id"
+			[@itemAnimation]
+			(delete)="deleteNote(note.id)"
+			[title]="note.title"
+			[body]="note.body">
+		</app-note-card>
+	</div>
+
+	<button
+		class="button floating-add-button is-primary"
+		routerLink="new">
+		+ Add
+	</button>
+	<button
+		class="button floating-remove-button is-secondary"
+		(click)="clearAll()">
+		Clear All
+	</button>
+</div>

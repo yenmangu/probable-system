@@ -1,0 +1,28 @@
+<div
+	#container
+	class="note-card-container">
+	<a [routerLink]="link">
+		<div class="note-card-content">
+			<h2 class="note-card-title">{{ title }}</h2>
+			<div
+				#bodyText
+				class="note-card-body">
+				<p
+					#noteP
+					class="note-text">
+					{{ body }}
+				</p>
+				<div
+					#truncator
+					class="fade-out-truncation"></div>
+			</div>
+			<div class="notes-list"></div>
+		</div>
+	</a>
+
+	<div
+		class="x-button"
+		(click)="delete()">
+		<span class="icon"> </span>
+	</div>
+</div>

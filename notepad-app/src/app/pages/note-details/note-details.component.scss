@@ -1,0 +1,20 @@
+@import '../../../main.styles.scss';
+
+.form-container {
+	max-width: 500px;
+	margin: auto;
+	margin-top: 3rem;
+}
+
+input,
+textarea {
+
+	&.ng-invalid.ng-touched {
+		border-color: $red;
+
+		&:focus {
+			box-shadow: 0 0 2 0 $red;
+
+		}
+	}
+}

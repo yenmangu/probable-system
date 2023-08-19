@@ -1,0 +1,49 @@
+@import '../../../main.styles.scss';
+
+.main-container {
+	display: flex;
+	flex-direction: column;
+	max-width: 500px;
+	margin: auto;
+	padding-top: 4rem;
+}
+
+.icon {
+
+	display: grid;
+	place-content: center;
+}
+
+.notes-list {
+	margin-top: 1.6rem;
+	margin-bottom: 70px
+}
+
+app-note-card {
+	display: block;
+	margin-bottom: 1rem;
+}
+
+.floating-add-button {
+	position: fixed;
+	bottom: 4rem;
+	margin-bottom: 1rem;
+	width: 500px;
+	border-radius: 5px;
+	box-shadow: 0 0 15px 5px rgba($purple, 0.2);
+
+	height: 3rem;
+	font-size: 1em
+}
+
+.floating-remove-button {
+	position: fixed;
+	bottom: 0;
+	margin-bottom: 1rem;
+	width: 500px;
+	border-radius: 5px;
+	box-shadow: 0 0 15px 5px rgba($purple, 0.2);
+
+	height: 3rem;
+	font-size: 1em
+}
