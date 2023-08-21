@@ -106,6 +106,10 @@ export class NotesListComponent implements OnInit {
 
 	notes: Note[] = new Array<Note>();
 
+	searchText!: string;
+
+	filteredList: Note[] = this.notes;
+
 	constructor(private notesService: NotesService) {}
 
 	ngOnInit(): void {
@@ -113,6 +117,7 @@ export class NotesListComponent implements OnInit {
 		// console.log(this.notesService.orderedArray)
 		this.notesService.notes$.subscribe(notes => {
 			this.notes = notes;
+			this.filteredList = notes;
 			console.log('OnInit, notes: ', this.notes);
 			if (this.notes.length === 0) {
 				console.log('no notes stored in the localStorage');
@@ -126,5 +131,35 @@ export class NotesListComponent implements OnInit {
 
 	clearAll(): void {
 		this.notesService.clearAll();
+	}
+
+	// search functions
+
+	onInputChange() {
+		this.filteredList = this.notes
+			.map(note => ({
+				note,
+				relevance: this.calculateRelevance(note, this.searchText.toLowerCase())
+			}))
+			.filter(item => item.relevance > 0)
+			.sort((a, b) => b.relevance - a.relevance)
+			.map(item => item.note);
+	}
+
+	// Search relevance score function
+	calculateRelevance(note: Note, searchTerm: string): number {
+		const titleMatches = note.title.toLowerCase().split(searchTerm).length - 1;
+		const bodyMatches = note.body.toLowerCase().split(searchTerm).length - 1;
+		return titleMatches + bodyMatches;
+	}
+
+	onSortChange(event: any) {
+		const selectedSort = event.target.value;
+
+		if (selectedSort === 'date') {
+			this.filteredList.sort((a, b) => b.date - a.date);
+		} else if (selectedSort === 'alphabetical') {
+			this.filteredList.sort((a, b) => a.title.localeCompare(b.title));
+		}
 	}
 }

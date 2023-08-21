@@ -1,13 +1,33 @@
 <div class="main-container">
-	<div class="search-bar-container">
-		<div class="field">
-			<p class="control has-icons-left">
-				<input
-					class="input"
-					type="text"
-					placeholder="filter" />
-				<span class="icon is-small is-left"><i class="fas fa-search"></i></span>
-			</p>
+	<div class="filter-sort-container">
+		<div class="search-bar-container">
+			<div class="field">
+				<p class="control has-icons-left">
+					<input
+						class="input"
+						type="text"
+						[(ngModel)]="searchText"
+						(ngModelChange)="onInputChange()"
+						placeholder="filter" />
+					<span class="icon is-small is-left"><i class="fas fa-search"></i></span>
+				</p>
+			</div>
+		</div>
+		<div class="sort-dropdown-container">
+			<div class="control has-icons-left">
+				<div class="select is-primary">
+					<select
+						name="sort"
+						(change)="onSortChange($event)"
+						id="">
+						<option value="date">Date</option>
+						<option value="alphabetical">A - Z</option>
+					</select>
+				</div>
+				<span class="icon is-small is-left">
+					<i class="fa-thin fa-arrow-down-short-wide"></i>
+				</span>
+			</div>
 		</div>
 	</div>
 
@@ -15,7 +35,7 @@
 		class="notes-list"
 		[@listAnimation]>
 		<app-note-card
-			*ngFor="let note of notes; index as i"
+			*ngFor="let note of filteredList; index as i"
 			[link]="'edit/' + note.id"
 			[@itemAnimation]
 			(delete)="deleteNote(note.id)"
